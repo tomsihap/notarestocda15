@@ -18,7 +18,10 @@ class RestaurantType extends AbstractType
             ->add('description')
             ->add('city', EntityType::class, [
                 'class' => City::class,
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'attr' => [
+                    'class' => 'restaurantFormCitySelect'
+                ]
             ])
         ;
     }

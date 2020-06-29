@@ -9,3 +9,19 @@
 
     <a href="#">Revenir à votre espace restaurateur</a>
 {% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function() {
+            $('.restaurantFormCitySelect').select2();
+        });
+    </script>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .select2-container--default {
+            color: black;
+        }
+    </style>
+{% endblock %}
