@@ -30,7 +30,7 @@ class City
     private $zipcode;
 
     /**
-     * @ORM\OneToMany(targetEntity=Restaurant::class, mappedBy="city", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Restaurant::class, mappedBy="city", orphanRemoval=true, cascade={"remove"})
      */
     private $restaurants;
 

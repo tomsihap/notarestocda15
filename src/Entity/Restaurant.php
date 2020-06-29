@@ -36,7 +36,7 @@ class Restaurant
     private $city;
 
     /**
-     * @ORM\OneToMany(targetEntity=Review::class, mappedBy="restaurant", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Review::class, mappedBy="restaurant", orphanRemoval=true, cascade={"remove"})
      */
     private $reviews;
 
