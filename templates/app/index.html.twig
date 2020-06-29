@@ -11,52 +11,29 @@
 
     <hr>
 
-    <h3>Nos séléctions :</h3>
+    <h3>Les derniers inscrits :</h3>
 
     <div class="row">
-        <div class="col-4">
-            <div class="card">
-                <div class="card-header">
-                    Les burgers de tonton
-                </div>
-                <div class="card-body">
-                    <em>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</em>
-                </div>
-                <div class="card-footer">
-                    <small>Noté <strong>4.5/5</strong> par nos utilisateurs</small>
-                    <a href="#" class="btn btn-sm btn-primary float-right">Voir</a>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-4">
-            <div class="card">
-                <div class="card-header">
-                    Les burgers de tonton
-                </div>
-                <div class="card-body">
-                    <em>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</em>
-                </div>
-                <div class="card-footer">
-                    <small>Noté <strong>4.5/5</strong> par nos utilisateurs</small>
-                    <a href="#" class="btn btn-sm btn-primary float-right">Voir</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-4">
-            <div class="card">
-                <div class="card-header">
-                    Les burgers de tonton
-                </div>
-                <div class="card-body">
-                    <em>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</em>
-                </div>
-                <div class="card-footer">
-                    <small>Noté <strong>4.5/5</strong> par nos utilisateurs</small>
-                    <a href="#" class="btn btn-sm btn-primary float-right">Voir</a>
+        {% for restaurant in restaurants %}
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>{{ restaurant.name }}</h4>
+                        <h5>Inscrit le {{ restaurant.createdAt | date('d/m/Y') }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <em>{{ restaurant.description }}</em>
+                    </div>
+                    <div class="card-footer">
+                        {% if restaurant.averageRating %}
+                        <small>Noté <strong>{{ restaurant.averageRating }}/5</strong> par nos utilisateurs</small>
+                        {% else %}
+                            <small>Soyez les premiers à noter ce restaurant !</small>
+                        {% endif %}
+                        <a href="{{ path('restaurant_show', {'id' : restaurant.id }) }}" class="btn btn-sm btn-primary float-right">Voir</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        {% endfor %}
 {% endblock %}

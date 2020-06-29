@@ -19,6 +19,18 @@ class RestaurantRepository extends ServiceEntityRepository
         parent::__construct($registry, Restaurant::class);
     }
 
+
+    /**
+     * @return Restaurant[]
+     */
+    public function findLastTen() {
+        return $this->createQueryBuilder('r')
+                    ->orderBy('r.createdAt', 'DESC')
+                    ->setMaxResults(10)
+                    ->getQuery()
+                    ->getResult();
+    }
+
     // /**
     //  * @return Restaurant[] Returns an array of Restaurant objects
     //  */

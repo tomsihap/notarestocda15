@@ -40,9 +40,15 @@ class Restaurant
      */
     private $reviews;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
     public function __construct()
     {
         $this->reviews = new ArrayCollection();
+        $this->setCreatedAt( new \DateTime() );
     }
 
     public function getId(): ?int
@@ -137,5 +143,17 @@ class Restaurant
         }
 
         return $average;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
     }
 }
