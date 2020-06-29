@@ -116,4 +116,26 @@ class Restaurant
 
         return $this;
     }
+
+    public function getCapitalizeName() : string
+    {
+        return strtoupper( $this->getName() );
+    }
+
+    public function getAverageRating() : ?float
+    {
+        $reviews = $this->getReviews();
+        $reviewsCount = count($reviews);
+
+        if ($reviewsCount < 1) {
+            return null;
+        }
+
+        $average = 0;
+        foreach($reviews as $review) {
+            $average += $review->getRating() / $reviewsCount;
+        }
+
+        return $average;
+    }
 }

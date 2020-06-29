@@ -17,10 +17,6 @@ class ReviewType extends AbstractType
             ->add('name')
             ->add('description')
             ->add('rating')
-            ->add('restaurant', EntityType::class, [
-                'class' => Restaurant::class,
-                'choice_label' => 'name'
-            ])
         ;
     }
 

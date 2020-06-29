@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Restaurant;
+use App\Entity\Review;
 use App\Form\RestaurantType;
+use App\Form\ReviewType;
 use App\Repository\RestaurantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,12 +51,24 @@ class RestaurantController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="restaurant_show", methods={"GET"})
+     * @Route("/{id}", name="restaurant_show", methods={"GET", "POST"})
      */
-    public function show(Restaurant $restaurant): Response
+    public function show(Request $request, Restaurant $restaurant): Response
     {
+        $review = new Review();
+        $review->setRestaurant($restaurant);
+        $reviewForm = $this->createForm(ReviewType::class, $review);
+        $reviewForm->handleRequest($request);
+
+        if($reviewForm->isSubmitted() && $reviewForm->isValid()) {
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($review);
+            $manager->flush();
+        }
+
         return $this->render('restaurant/show.html.twig', [
             'restaurant' => $restaurant,
+            'reviewForm' => $reviewForm->createView()
         ]);
     }
 
